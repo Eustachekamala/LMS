@@ -4,14 +4,13 @@
 @custom-variant dark (&:is(.dark *));
 
 .container {
-  @apply flex items-center justify-center;
-  padding: 1rem;
+  padding: 2rem;
   --breakpoint-sm: 1500px;
 }
 
 body {
   background-color: var(--background);
-  font-family: 'font-geist-sans', sans-serif; /* Reference custom fonts */
+  font-family: 'font-geist-sans', sans-serif;
 }
 
 :root {

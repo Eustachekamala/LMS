@@ -7,7 +7,7 @@ import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 const  client = await clerkClient();
 
-export async function getCurrentUser({allData = false }= {}) {
+export async function getCurrentUser({allData = false } = {}) {
     const {userId, sessionClaims, redirectToSignIn} = await auth();
 
     return {

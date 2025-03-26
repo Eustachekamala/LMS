@@ -14,7 +14,7 @@ export async function insertUser(data: typeof UserTable.$inferInsert) {
     })
     .returning();
 
-  if (!newUser) throw new Error("Failed to create or update User");
+  if (newUser == null) throw new Error("Failed to create or update User");
   revalidateUserCache(newUser.id)
 
   return newUser;
@@ -28,7 +28,7 @@ export async function updateUser({ clerkUserId }: { clerkUserId: string }, data:
     .where(eq(UserTable.clerkUserId, clerkUserId))
     .returning();
 
-  if (!updatedUser) throw new Error("Failed to update User");
+  if (updatedUser == null) throw new Error("Failed to update User");
   revalidateUserCache(updatedUser.id)
   return updatedUser;
 }
@@ -47,7 +47,7 @@ export async function deleteUser({ clerkUserId }: { clerkUserId: string }) {
     .where(eq(UserTable.clerkUserId, clerkUserId))
     .returning();
 
-  if (!deletedUser) throw new Error("Failed to delete User");
+  if (deletedUser == null ) throw new Error("Failed to delete User");
   revalidateUserCache(deletedUser.id)
   return deletedUser;
 }
