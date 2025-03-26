@@ -46,8 +46,11 @@ export function NavBar(){
 }
 
 async function AdminLink() {
-    const user = await getCurrentUser();
+    const user = await getCurrentUser({allData: true});
+    console.log(user.user?.name);
+    
     if(!canAccessAdminPages(user)) return null
+    
     return (
         <Link href="/admin" className="hover:bg-gray-800/10 flex items-center px-3 py-1 rounded-lg">Admin</Link>
     )

@@ -1,7 +1,15 @@
-import { UserTable } from "@/drizzle/schema";
-import { db } from "@/drizzle/db";
+import { revalidateTag } from "next/cache"
+import { getGlobalTag, getIdTag } from "@/lib/dataCache"
 
-export async function inserUser(data : typeof UserTable.$inferInsert){
-    const users = await db.insert(UserTable).values(data).returning()
-    return users
+export function getUserGlobal(){
+    return getGlobalTag("users")
+}
+
+export function getUserIdTag(id: string){
+    return getIdTag("users", id)
+}
+
+export function revalidateUserCache(id: string){
+    revalidateTag(getUserGlobal())
+    revalidateTag(getUserIdTag(id))
 }
